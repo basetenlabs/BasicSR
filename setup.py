@@ -80,8 +80,6 @@ def get_version():
 
 
 def make_cuda_ext(name, module, sources, sources_cuda=None):
-    import torch
-    from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
     if sources_cuda is None:
         sources_cuda = []
     define_macros = []
@@ -115,6 +113,8 @@ def get_requirements(filename='requirements.txt'):
 
 
 if __name__ == '__main__':
+    import torch
+    from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
     cuda_ext = os.getenv('BASICSR_EXT')  # whether compile cuda ext
     if cuda_ext == 'True':
         ext_modules = [
