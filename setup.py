@@ -6,7 +6,6 @@ import os
 import subprocess
 import time
 import torch
-from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
 
 version_file = 'basicsr/version.py'
 
@@ -82,6 +81,7 @@ def get_version():
 
 
 def make_cuda_ext(name, module, sources, sources_cuda=None):
+    from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
     if sources_cuda is None:
         sources_cuda = []
     define_macros = []
