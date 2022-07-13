@@ -116,8 +116,9 @@ if __name__ == '__main__':
     try:
         import torch
         from torch.utils.cpp_extension import BuildExtension, CppExtension, CUDAExtension
+        _build_ext = {'build_ext': BuildExtension}
     except ImportError:
-        raise ImportError('Unable to import torch - torch is needed to build cuda extensions')
+        _build_ext = {}
     cuda_ext = os.getenv('BASICSR_EXT')  # whether compile cuda ext
     if cuda_ext == 'True':
         ext_modules = [
@@ -165,5 +166,5 @@ if __name__ == '__main__':
         setup_requires=['cython', 'numpy', 'torch'],
         install_requires=get_requirements(),
         ext_modules=ext_modules,
-        cmdclass={'build_ext': BuildExtension},
+        cmdclass=_build_ext,
         zip_safe=False)
